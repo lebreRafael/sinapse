@@ -18,6 +18,23 @@ A Memed disponibiliza duas chaves de acesso:
 - **API-KEY** - Chave pública, pode aparecer no front-end. Permite a aplicação acessar os serviços de busca e cadastro de usuário.
 - **SECRET-KEY** - Chave privada, deve ficar somente no back-end. Quando usada junto com a API-KEY, permite o envio de prescrições.
 
+### Servidor para testes/homologação
+Caso queira fazer um teste de integração, disponibilizamos um servidor com um banco de dados reduzido. Para utilizá-lo, substitua os domínios pelo dos servidores de teste:
+
+| Domínio de produção | Domínio de teste |
+|---------------------|------------------|
+|memed.com.br|integracao.memed.com.br|
+|api.memed.com.br|integracao.api.memed.com.br|
+
+Para acessar alguns recursos na API de teste, utilize as chaves abaixo:
+
+|   | Chaves de acesso |
+|---|--------------------|
+|API-KEY|iJGiB4kjDGOLeDFPWMG3no9VnN7Abpqe3w1jEFm6olkhkZD6oSfSmYCm|
+|SECRET-KEY|Xe8M5GvBGCr4FStKfxXKisRo3SfYKI7KrTMkJpCAstzu2yXVN4av5nmL|
+
+> **Atenção**: O banco de dados é limpo após alguns dias. Não envie qualquer dado sensível nesse servidor, outras pessoas irão acessá-lo.
+
 ### Integrando com a API
 Para que o usuário (profissional da saúde com CRM) possa utilizar a prescrição da Memed, é necessário cadastrá-lo no banco de dados da Memed, seguindo o fluxo abaixo:
 
