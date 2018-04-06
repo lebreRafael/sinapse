@@ -8,6 +8,12 @@ Sinapse Prescrição é a ferramenta 100% gratuita da Memed que permite o seu si
 - Envio por SMS - Facilita a vida do paciente, entregando agilidade e permitindo a comparação de preços.
 - Banco de medicamentos - O mais completo do Brasil, com informações constantemente curadas pela nossa equipe.
 
+## Demonstração
+
+Clique na imagem abaixo para ver um exemplo de integração:
+
+<p align="center"><a href="https://memeddev.github.io/sinapse/demo-sinapse-prescricao.html" target="_blank"><img src="https://user-images.githubusercontent.com/2197005/38443811-53d52ab6-39c3-11e8-9f7a-a1fb8e6aeafd.png" alt="Memed Sinapse Prescrição Demo" /></a></p>
+
 ## Como integrar
 A integração é feita em dois momentos: implementando o cadastro do usuário (profissional da saúde com CRM) via API e depois implementando o Sinapse Prescrição (front-end) dentro de seu sistema.
 Logo no primeiro acesso do usuário, o mesmo deverá aceitar os termos de condições e então poderá acessar o Sinapse Prescrição.
