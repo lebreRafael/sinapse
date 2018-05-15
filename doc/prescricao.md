@@ -127,6 +127,13 @@ Para integrar o módulo de prescricão em sua plataforma é necessário definir 
 
 Com a propriedade `data-color` você pode customizar a cor primária, deixando o Sinapse Prescrição mais parecido com o seu produto.
 
+### Definindo o paciente
+Para definir o paciente, basta disparar um comando para o módulo de prescrição, como no exemplo abaixo:
+
+```js
+MdHub.command.send('plataforma.prescricao', 'setPaciente', {nome: 'José da Silva'});
+```
+
 ### Escutando eventos
 Você pode assinar eventos que são disparados pelos módulos e implementa-los conforme necessidade em sua plataforma.
 
@@ -213,8 +220,10 @@ A resposta será como a abaixo:
 
 Caso sua aplicação seja do tipo SPA (Single Page Application) e não faça "refresh" após a ação de login/logout, você pode redefinir o token do usuário logado utilizando o código abaixo:
 
-```javascript
-MdHub.command.send('plataforma.sdk', 'setToken', 'TOKEN_DO_NOVO_USUARIO_LOGADO');
-// Atualiza os iframes da Memed (refresh), para que nenhum conteúdo do usuário antigo esteja disponível para o atual
-document.querySelectorAll('#iframe-container iframe').forEach((iframe) => { iframe.src = iframe.src; });
+```js
+MdSinapsePrescricao.setToken('TOKEN_DO_NOVO_USUARIO');
 ```
+
+Obs: A função acima causará o recarregamento dos iframes. A Memed somenta suporta os navegadores modernos (IE 11+), verifique se para os usuários do seu sistema, a atualização dos iframes ocorre corretamente.
+
+
