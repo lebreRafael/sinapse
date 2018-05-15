@@ -208,3 +208,13 @@ A resposta será como a abaixo:
     }
 }
 ```
+
+## Trocando de usuário
+
+Caso sua aplicação seja do tipo SPA (Single Page Application) e não faça "refresh" após a ação de login/logout, você pode redefinir o token do usuário logado utilizando o código abaixo:
+
+```javascript
+MdHub.command.send('plataforma.sdk', 'setToken', 'TOKEN_DO_NOVO_USUARIO_LOGADO');
+// Atualiza os iframes da Memed (refresh), para que nenhum conteúdo do usuário antigo esteja disponível para o atual
+document.querySelectorAll('#iframe-container iframe').forEach((iframe) => { iframe.src = iframe.src; });
+```
