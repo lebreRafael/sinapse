@@ -151,7 +151,7 @@ Obs: A Memed identifica os pacientes pelo nome. Em caso de pacientes com nomes i
 ### Escutando eventos
 Você pode assinar eventos que são disparados pelos módulos e implementa-los conforme necessidade em sua plataforma.
 
-### Quando o módulo de prescrição terminou de carregar
+#### Quando o módulo de prescrição terminou de carregar
 Os módulos da Memed emitem eventos quando inicializados, podendo ser capturados da seguinte forma:
 
 ```js
