@@ -127,12 +127,37 @@ Para integrar o módulo de prescricão em sua plataforma é necessário definir 
 
 Com a propriedade `data-color` você pode customizar a cor primária, deixando o Sinapse Prescrição mais parecido com o seu produto.
 
+### Aguardando o módulo de prescrição ser carregado
+Os módulos da Memed emitem eventos quando inicializados, podendo ser capturados da seguinte forma:
+
+```js
+MdHub.event.add('core:moduleInit', function moduleInitHandler(module) { 
+  if (module.name === 'plataforma.prescricao') {
+    // Módulo de prescrição inicializado
+  } 
+});
+```
+
+### Mostrando/Escondendo manualmente o módulo de prescrição
+
+```js
+// Mostra o módulo de prescrição
+MdHub.module.show('plataforma.prescricao');
+```
+
+```js
+// Esconde o módulo de prescrição
+MdHub.module.hide('plataforma.prescricao');
+```
+
 ### Definindo o paciente
 Para definir o paciente, basta disparar um comando para o módulo de prescrição, como no exemplo abaixo:
 
 ```js
 MdHub.command.send('plataforma.prescricao', 'setPaciente', {nome: 'José da Silva'});
 ```
+
+Obs: A Memed identifica os pacientes pelo nome. Em caso de pacientes com nomes iguais, eles serão agrupados. Estamos desenvolvendo uma solução para coletar outros identificadores (cpf, rg...) de forma criptografada junto aos parceiros.
 
 ### Escutando eventos
 Você pode assinar eventos que são disparados pelos módulos e implementa-los conforme necessidade em sua plataforma.
