@@ -111,6 +111,82 @@ Lista de cidades, filtradas por um nome
 curl -X GET -H "Accept: application/json" "http://api.memed.com.br/v1/cidades?filter[q]=Campinas"
 ```
 
+#### Recuperando o token de um usuário
+
+É possível ver todas as informações de um usuário, incluindo o token, através do request abaixo:
+
+```curl
+curl -X GET \
+  'https://api.memed.com.br/v1/sinapse-prescricao/usuarios/CRM-DO-USUARIO?api-key=API-KEY&secret-key=SECRET-KEY' \
+  -H 'Accept: application/vnd.api+json'
+```
+
+```
+Parâmetros da URL:
+
+CRM-DO-USUARIO - Número + UF (ex: "123456SP")
+```
+
+O retorno do request conterá os dados:
+
+```json
+{
+    "data": {
+        "type": "usuarios",
+        "attributes": {
+            "nome": "João",
+            "sobrenome": "da Silva",
+            "cpf": "00000000000",
+            "email": "joao@dasilva.com.br",
+            "data_nascimento": "01/01/1900",
+            "sexo": "M",
+            "cidade": "São Paulo",
+            "crm": "123456",
+            "especialidade": "Cirurgia oncológica",
+            "token": "TOKEN_DO_USUARIO",
+            "uf": "SP",
+            "user_type": "Medicos",
+            "total_of_prescriptions": 0,
+            "total_of_prescripted_drugs": 0,
+            "total_of_sms_prescriptions": 0
+        },
+        "links": {
+            "self": "https://api.memed.com.br/v1/sinapse-prescricao/usuarios/123456SP"
+        },
+        "relationships": {
+            "cidade": {
+                "data": {
+                    "id": 5213,
+                    "type": "cidades"
+                },
+                "links": {
+                    "self": "https://api.memed.com.br/v1/sinapse-prescricao/usuarios/123456SP/relationships/cidade"
+                }
+            },
+            "sociedades": {
+                "data": [],
+                "links": {
+                    "self": "https://api.memed.com.br/v1/sinapse-prescricao/usuarios/123456SP/relationships/sociedades"
+                }
+            },
+            "especialidade": {
+                "data": {
+                    "id": 50,
+                    "type": "especialidades"
+                },
+                "links": {
+                    "self": "https://api.memed.com.br/v1/sinapse-prescricao/usuarios/123456SP/relationships/especialidade"
+                }
+            }
+        },
+        "id": 123456
+    },
+    "links": {
+        "self": "https://api.memed.com.br/v1/sinapse-prescricao/usuarios/123456SP"
+    }
+}
+```
+
 ## Integrando com o front-end
 Para integrar o módulo de prescricão em sua plataforma é necessário definir um elemento com id `memed-prescricao` e depois incluir o script que irá carregar as dependências necessárias:
 
