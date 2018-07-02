@@ -1,233 +1,263 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<title>Prontuário Médico</title>
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css">
+    <head>
+        <meta charset="utf-8">
+        <title>Prontuário Médico</title>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css">
 
-	<style type="text/css">
-		a.active, .header.item {
-			color: #ff4757 !important;
-		}
+        <style type="text/css">
+a.active, .header.item {
+    color: #ff4757 !important;
+}
 
-		.left-menu {
-			padding-right: 0 !important;
-		}
+        .left-menu {
+            padding-right: 0 !important;
+        }
 
-		.top-menu {
-			padding-bottom: 0 !important;
-		}
+        .top-menu {
+            padding-bottom: 0 !important;
+        }
 
-		.top-menu .ui.menu {
-			border-radius: 0 !important;
-		}
+        .top-menu .ui.menu {
+            border-radius: 0 !important;
+        }
 
-		.ui.grid:before {
-			background-color: #57606f;
-			bottom: 0;
-			content: "";
-			left: 0;
-			position: absolute;
-			top: 0;
-			width: 11.6%;
-		}
+        .ui.grid:before {
+            background-color: #57606f;
+            bottom: 0;
+            content: "";
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 11.6%;
+        }
 
-		.ui.secondary.vertical.menu {
-			width: 100%;
-		}
+        .ui.secondary.vertical.menu {
+            width: 100%;
+        }
 
-		.ui.secondary.vertical.menu a {
-			color: white !important;
-		}
+        .ui.secondary.vertical.menu a {
+            color: white !important;
+        }
 
-		.ui.secondary.vertical.menu a.active {
-			color: #dfe4ea !important;
-		}
+        .ui.secondary.vertical.menu a.active {
+            color: #dfe4ea !important;
+        }
 
-		.ui.secondary.vertical.menu a:hover {
-			color: #ff4757 !important;
-		}
+        .ui.secondary.vertical.menu a:hover {
+            color: #ff4757 !important;
+        }
 
-		.ui.secondary.vertical.menu .item {
-			color: #a4b0be;	
-		}
+        .ui.secondary.vertical.menu .item {
+            color: #a4b0be;	
+        }
 
-		.ui.segment.code {
-			padding: 0;
-		}
+        .ui.segment.code {
+            padding: 0;
+        }
 
-		.ui.segment.code pre {
-			margin-bottom: 0;
-			margin-top: 0;
-		}
-	</style>
-</head>
-<body>
-	<div class="ui grid">
-		<div class="sixteen wide column top-menu">
-			<div class="ui menu">
-				<div class="header item"><i class="plus square icon"></i> Prontuário Médico</div>
-				<a class="item">Resumos</a>
-				<a class="item">Agenda</a>
-				<a class="active item">Pacientes</a>
-				<a class="item">Finanças</a>
-			</div>
-		</div>
+        .ui.segment.code pre {
+            margin-bottom: 0;
+            margin-top: 0;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="ui grid">
+            <div class="sixteen wide column top-menu">
+                <div class="ui menu">
+                    <div class="header item"><i class="plus square icon"></i> Prontuário Médico</div>
+                    <a class="item">Resumos</a>
+                    <a class="item">Agenda</a>
+                    <a class="active item">Pacientes</a>
+                    <a class="item">Finanças</a>
+                </div>
+            </div>
 
-		<div class="two wide column left-menu">
-			<div class="ui secondary vertical menu">
-				<a class="active item">Home</a>
+            <div class="two wide column left-menu">
+                <div class="ui secondary vertical menu">
+                    <a class="active item">Home</a>
 
-				<div class="item">
-					Anamnese
-					<div class="menu">
-						<a class="item">Resumo</a>
-						<a class="item">Alergias</a>
-						<a class="item">Sintomas</a>
-						<a class="item">Exame Físico</a>
-						<a class="item">Hipótese Diagnóstica</a>
-					</div>
-				</div>
-				<div class="item">
-					Conduta
-					<div class="menu">
-						<!-- Link com o ID "memed-prescricao" -->
-						<a class="item" id="memed-prescricao">Prescrições</a>
-						<a class="item">Cartas e Atestados</a>
-						<a class="item">Imagens e Anexos</a>
-					</div>
-				</div>
-			</div>
-		</div>
+                    <div class="item">
+                        Anamnese
+                        <div class="menu">
+                            <a class="item">Resumo</a>
+                            <a class="item">Alergias</a>
+                            <a class="item">Sintomas</a>
+                            <a class="item">Exame Físico</a>
+                            <a class="item">Hipótese Diagnóstica</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        Conduta
+                        <div class="menu">
+                            <!-- Link com o ID "memed-prescricao" -->
+                            <a class="item" id="memed-prescricao">Prescrições</a>
+                            <a class="item">Cartas e Atestados</a>
+                            <a class="item">Imagens e Anexos</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-		<div class="ten wide column">
-			<div class="ui container">
-				<h1 class="ui header">Exemplo de integração: Sinapse Prescrição</h1>
+            <div class="ten wide column">
+                <div class="ui container">
+                    <h1 class="ui header">Exemplo de integração: Sinapse Prescrição</h1>
 
-				<p><i class="arrow left icon"></i>Clique em <span style="color: #ff4757">Prescrições</span>, no menu ao lado, para ver o Sinapse Prescrição funcionando.</p>
+                    <p><i class="arrow left icon"></i>Clique em <span style="color: #ff4757">Prescrições</span>, no menu ao lado, para ver o Sinapse Prescrição funcionando.</p>
 
-				<p>Para que este "Prontuário" esteja integrado com a Memed, foi necessário:</p>
+                    <p>Para que este "Prontuário" esteja integrado com a Memed, foi necessário:</p>
 
-				<div class="ui list">
-					<a class="item" href="https://github.com/MemedDev/sinapse/blob/master/doc/prescricao.md#integrando-com-a-api" target="_blank">
-						<i class="arrow alternate circle right outline icon"></i>
-						<div class="content">
-							<div class="header">Cadastrar o usuário na Memed usando a API</div>
-							<div class="description">Veja como fazer o request clicando aqui</div>
-						</div>
-					</a>
-					<a class="item">
-						<i class="save outline right icon"></i>
-						<div class="content">
-							<div class="header">Armazenar o token do usuário</div>
-							<div class="description">É um token JWT, que permite o prontuário se logar como o usuário</div>
-						</div>
-					</a>
-					<a class="item" href="https://github.com/MemedDev/sinapse/blob/master/doc/prescricao.md#integrando-com-o-front-end" target="_blank">
-						<i class="js right icon"></i>
-						<div class="content">
-							<div class="header">Incluir o Javascript do Sinapse Prescrição</div>
-							<div class="description">Uma linha de código e está quase pronto</div>
-						</div>
-					</a>
-					<div class="ui segment code">
-						<pre><code class="javascript">&lt;script
+                    <div class="ui list">
+                        <a class="item" href="https://github.com/MemedDev/sinapse/blob/master/doc/prescricao.md#integrando-com-a-api" target="_blank">
+                            <i class="arrow alternate circle right outline icon"></i>
+                            <div class="content">
+                                <div class="header">Cadastrar o usuário na Memed usando a API</div>
+                                <div class="description">Veja como fazer o request clicando aqui</div>
+                            </div>
+                        </a>
+                        <a class="item">
+                            <i class="save outline right icon"></i>
+                            <div class="content">
+                                <div class="header">Armazenar o token do usuário</div>
+                                <div class="description">É um token JWT, que permite o prontuário se logar como o usuário</div>
+                            </div>
+                        </a>
+                        <a class="item" href="https://github.com/MemedDev/sinapse/blob/master/doc/prescricao.md#integrando-com-o-front-end" target="_blank">
+                            <i class="js right icon"></i>
+                            <div class="content">
+                                <div class="header">Incluir o Javascript do Sinapse Prescrição</div>
+                                <div class="description">Uma linha de código e está quase pronto</div>
+                            </div>
+                        </a>
+                        <div class="ui segment code">
+                            <pre><code class="javascript">&lt;script
     type="text/javascript"
     src="https://memed.com.br/modulos/plataforma.sinapse-prescricao/build/sinapse-prescricao.min.js"
     data-token="TOKEN_DO_USUARIO_OBTIDO_NO_CADASTRO_VIA_API"
     data-color="#576cff"&gt;
 &lt;/script&gt;
-</code></pre>
-					</div>
-					<a class="item" href="https://github.com/MemedDev/sinapse/blob/master/doc/prescricao.md#integrando-com-o-front-end" target="_blank">
-						<i class="linkify right icon"></i>
-						<div class="content">
-							<div class="header">Adicionar id="memed-prescricao" ao link de prescrição</div>
-							<div class="description">Quando o link for pressionado, aparecerá a Memed</div>
-						</div>
-					</a>
-					<div class="ui segment code">
-						<pre><code class="html">&lt;a class="item" id="memed-prescricao"&gt;Prescrições&lt;/a&gt;</code></pre>
-					</div>
-					<a class="item" href="https://github.com/MemedDev/sinapse/blob/master/doc/prescricao.md#capturando-uma-prescri%C3%A7%C3%A3o" target="_blank">
-						<i class="file alternate outline right icon"></i>
-						<div class="content">
-							<div class="header">Capturar prescrições feitas</div>
-							<div class="description">Quando o usuário fizer uma prescrição, é possível capturar o evento</div>
-						</div>
-					</a>
-					<div class="ui segment code">
-						<pre><code class="javascript">&lt;script
+                            </code></pre>
+                        </div>
+                        <a class="item" href="https://github.com/MemedDev/sinapse/blob/master/doc/prescricao.md#integrando-com-o-front-end" target="_blank">
+                            <i class="linkify right icon"></i>
+                            <div class="content">
+                                <div class="header">Adicionar id="memed-prescricao" ao link de prescrição</div>
+                                <div class="description">Quando o link for pressionado, aparecerá a Memed</div>
+                            </div>
+                        </a>
+                        <div class="ui segment code">
+                            <pre><code class="html">&lt;a class="item" id="memed-prescricao"&gt;Prescrições&lt;/a&gt;</code></pre>
+                        </div>
+                        <a class="item" href="https://github.com/MemedDev/sinapse/blob/master/doc/prescricao.md#definindo-o-paciente" target="_blank">
+                            <i class="linkify right icon"></i>
+                            <div class="content">
+                                <div class="header">Auto preenchimento do paciente</div>
+                                <div class="description">Quando o link for pressionado, aparecerá a Memed já com o nome do paciente preenchido</div>
+                            </div>
+                        </a>
+                        <div class="ui segment code">
+                            <pre><code class="javascript">MdHub.command.send('plataforma.prescricao', 'setPaciente', {nome: 'José da Silva'});</code></pre>
+                        </div>
+                        <h3>Pacientes</h3>
+                        <table class="ui celled table">
+                            <thead>
+                                <tr>
+                                    <th>Nome do paciente</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><a href="#" class="memed-prescricao">Fabio Luiz</a></td></tr>
+                                <tr><td><a href="#" class="memed-prescricao">Pedro Henrrique</a></td></tr>
+                                <tr><td><a href="#" class="memed-prescricao">Maria Oliveira</a></td></tr>
+                            </tbody>
+                        </table>
+                        <a class="item" href="https://github.com/MemedDev/sinapse/blob/master/doc/prescricao.md#capturando-uma-prescri%C3%A7%C3%A3o" target="_blank">
+                            <i class="file alternate outline right icon"></i>
+                            <div class="content">
+                                <div class="header">Capturar prescrições feitas</div>
+                                <div class="description">Quando o usuário fizer uma prescrição, é possível capturar o evento</div>
+                            </div>
+                        </a>
+                        <div class="ui segment code">
+                            <pre><code class="javascript">&lt;script
 MdHub.event.add('prescricaoSalva', function prescricaoSalvaCallback(idPrescricao) {
-	// Aqui é possível enviar esse ID para seu back-end obter mais informações
-	funcaoParaEnviarParaBackendObterMaisInformacoes(idPrescricao);
+    // Aqui é possível enviar esse ID para seu back-end obter mais informações
+    funcaoParaEnviarParaBackendObterMaisInformacoes(idPrescricao);
 });
-&lt;/script&gt;
-</code></pre>
-					</div>
+&lt;/script&gt;</code></pre>
+                        </div>
 
-					<h3>Prescrições capturadas:</h3>
-					<table class="ui celled table prescricoes-capturadas">
-						<thead>
-						<tr>
-							<th>#</th>
-							<th>ID da prescrição</th>
-						</tr>
-						</thead>
-						<tbody>
-							<tr><td colspan="2">Faça uma prescrição para aparecer aqui</td></tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
+                        <h3>Prescrições capturadas:</h3>
+                        <table class="ui celled table prescricoes-capturadas">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>ID da prescrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td colspan="2">Faça uma prescrição para aparecer aqui</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-	<script>hljs.initHighlightingOnLoad();</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
 
-	<!-- Script do Sinapse Prescrição -->
-	<script
-        type="text/javascript"
-        src="https://integracao.memed.com.br/modulos/plataforma.sinapse-prescricao/build/sinapse-prescricao.min.js"
-        data-token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.WyI3NDUiLCIzZTlmZjQyYzUyYjQ1ZTVkM2Q0M2NhOTMwOGM5ZjY5YiIsIjIwMTgtMDMtMTMiLCJwbGF0YWZvcm1hIl0.32bhpdZzF-Rfzd2hRpl5kxmk6FLkEENh1e4mT_9oOSc"
-        data-color="#ff4757">
-    </script>
+        <!-- Script do Sinapse Prescrição -->
+        <script
+            type="text/javascript"
+            src="https://integracao.memed.com.br/modulos/plataforma.sinapse-prescricao/build/sinapse-prescricao.min.js"
+            data-token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.WyI3NDUiLCIzZTlmZjQyYzUyYjQ1ZTVkM2Q0M2NhOTMwOGM5ZjY5YiIsIjIwMTgtMDMtMTMiLCJwbGF0YWZvcm1hIl0.32bhpdZzF-Rfzd2hRpl5kxmk6FLkEENh1e4mT_9oOSc"
+            data-color="#ff4757">
+        </script>
 
-    <script type="text/javascript">
-    	let prescricoesCapturadas = [];
-    	const prescricoesCapturadasContainer = $('table.prescricoes-capturadas tbody');
+        <script type="text/javascript">
+            let prescricoesCapturadas = [];
+            const prescricoesCapturadasContainer = $('table.prescricoes-capturadas tbody');
 
-    	function initialize() {
-    		/**
-    		 * Captura as prescrições feitas pelo usuário
-    		 */
-    		MdHub.event.add('prescricaoSalva', (idPrescricao) => {
-    			if (prescricoesCapturadas.length === 0) {
-    				prescricoesCapturadasContainer.html('');
-    			}
+            function initialize() {
+                /**
+                 * Captura as prescrições feitas pelo usuário
+                 */
+                MdHub.event.add('prescricaoSalva', (idPrescricao) => {
+                    if (prescricoesCapturadas.length === 0) {
+                        prescricoesCapturadasContainer.html('');
+                    }
 
-    			if (prescricoesCapturadas.indexOf(idPrescricao) > - 1) {
-    				return;
-    			}
+                    if (prescricoesCapturadas.indexOf(idPrescricao) > - 1) {
+                        return;
+                    }
 
-    			prescricoesCapturadas.push(idPrescricao);
-    			prescricoesCapturadasContainer.append('<tr><td>' + prescricoesCapturadas.length + '</td><td>' + idPrescricao + '</td>');
-			});
-    	}
+                    prescricoesCapturadas.push(idPrescricao);
+                    prescricoesCapturadasContainer.append('<tr><td>' + prescricoesCapturadas.length + '</td><td>' + idPrescricao + '</td>');
+                });
 
-    	$(document).ready(() => {
-    		// Aguarda as bibliotecas da Memed serem carregadas, para então fazer o bind de eventos
-    		let waitMdHubLoad = setInterval(() => {
-    			if (window.MdHub) {
-    				clearInterval(waitMdHubLoad);
-    				initialize();
-    			}
-    		}, 100);
-    	});
-    </script>
-</body>
+                $('.memed-prescricao').click(function(element){
+                    MdHub.command.send('plataforma.prescricao', 'setPaciente', {nome: element.target.text});
+                })
+
+                $('#memed-prescricao').click(function(element){
+                    MdHub.command.send('plataforma.prescricao', 'setPaciente', {nome: ''});
+                })
+            }
+
+            $(document).ready(() => {
+                // Aguarda as bibliotecas da Memed serem carregadas, para então fazer o bind de eventos
+                let waitMdHubLoad = setInterval(() => {
+                    if (window.MdHub) {
+                        clearInterval(waitMdHubLoad);
+                        initialize();
+                    }
+                }, 100);
+            });
+        </script>
+    </body>
 </html>
