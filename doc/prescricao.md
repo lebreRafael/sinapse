@@ -317,6 +317,22 @@ A resposta será como a abaixo:
 }
 ```
 
+## Capturando históricos de prescrições
+
+```bash
+curl -X GET \
+  'https://api.memed.com.br/v1/prescricoes?token=AQUI_VAI_O_TOKEN_DO_USUARIO' \
+  -H 'Accept: application/vnd.api+json'
+```
+
+O histórico de prescrições é páginado (10 em 10 itens). Caso deseje ver os próximos 10 itens:
+
+```bash
+curl -X GET \
+  'https://api.memed.com.br/v1/prescricoes?token=AQUI_VAI_O_TOKEN_DO_USUARIO&page[offset]=10' \
+  -H 'Accept: application/vnd.api+json'
+```
+
 ## Trocando de usuário
 
 Caso sua aplicação seja do tipo SPA (Single Page Application) e não faça "refresh" após a ação de login/logout, você pode redefinir o token do usuário logado utilizando o código abaixo:
@@ -327,4 +343,42 @@ MdSinapsePrescricao.setToken('TOKEN_DO_NOVO_USUARIO');
 
 Obs: A função acima causará o recarregamento dos iframes. A Memed somenta suporta os navegadores modernos (IE 11+), verifique se para os usuários do seu sistema, a atualização dos iframes ocorre corretamente.
 
+## Cadastrando protocolos para o usuário
 
+É possível cadastrar protocolos de tratamento para o usuário através da API:
+
+```bash
+curl -X POST \
+  'https://api.memed.com.br/v1/protocolos?token=AQUI_VAI_O_TOKEN_DO_USUARIO' \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "data": {
+   "type": "protocolos",
+   "attributes": {
+     "nome": "Nome do Protocolo",
+     "medicamentos": [
+       {
+         "nome": "Texto livre que não é um medicamento",
+         "posologia": "<p>Tomar 2x ao dia</p>",
+         "quantidade": "1",
+         "composicao": null,
+         "fabricante": null,
+         "titularidade": null,
+         "preco": null
+       },
+       {
+         "id": "a61931095900",
+         "nome": "ABC 10mg/g, Creme tópico (1un de 20g)",
+         "posologia": "<p>Tomar 1x durante a noite por 15 dias</p>",
+         "quantidade": "1",
+         "composicao": "Clotrimazol 10mg/g",
+         "fabricante": "Kley Hertz",
+         "titularidade": "Similar",
+         "preco": null
+       }
+     ]
+   }
+  }
+}'
+```
