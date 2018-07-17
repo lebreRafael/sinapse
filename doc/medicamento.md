@@ -1,3 +1,7 @@
+# Atenção
+
+O Memed Sinapse Medicamento foi descontinuado, não recebendo novas funcionalidades (apenas correções). Recomendamos o uso do [Sinapse Prescrição](prescricao.md).
+
 # Memed Sinapse Medicamento
 
 Memed Sinapse Medicamento é um plugin 100% gratuito da Memed que transforma qualquer campo de texto (inputs, textarea) em uma intuitiva ferramenta de suporte a prescrição médica.
