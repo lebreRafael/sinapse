@@ -219,10 +219,73 @@ MdHub.module.hide('plataforma.prescricao');
 Para definir o paciente, basta disparar um comando para o módulo de prescrição, como no exemplo abaixo:
 
 ```js
-MdHub.command.send('plataforma.prescricao', 'setPaciente', {nome: 'José da Silva'});
+MdHub.command.send('plataforma.prescricao', 'setPaciente', {
+  // Nome do paciente (obrigatório)
+  nome: 'José da Silva',
+  // Endereço do paciente (opcional)
+  endereco: 'Rua da Saúde, 123',
+  // Cidade do paciente (opcional)
+  cidade: 'São Paulo',
+  // Telefone (opcional, DDD + digitos, somente números)
+  telefone: '11012345678',
+  // ID do paciente na base de dados do seu prontuário/plataforma, útil para identificação posterior
+  // e sincronização com a Memed
+  idExterno: 123,
+  // Array de princípios ativos que o paciente possui alergia
+  allergy: [20, 31, 42]
+});
 ```
 
-Obs: A Memed identifica os pacientes pelo nome. Em caso de pacientes com nomes iguais, eles serão agrupados. Estamos desenvolvendo uma solução para coletar outros identificadores (cpf, rg...) de forma criptografada junto aos parceiros.
+Obs: A Memed identifica os pacientes pelo nome. Em caso de pacientes com nomes iguais, eles serão agrupados, a não ser que seja definido o atributo "idExterno".
+
+Para buscar os princípios ativos utilizados na detecção de alergias, usando a API da Memed:
+
+```bash
+curl -X GET \
+  'https://api.memed.com.br/v1/drugs/ingredients?limit=10&order[field]=name&order[sort]=asc&terms=TERMO_A_SER_BUSCADO&api-key=API-KEY&secret-key=SECRET-KEY' \
+  -H 'Accept: application/vnd.api+json'
+```
+
+Exemplo de resposta:
+
+```json
+{
+    "data": [
+        {
+            "type": "ingredient",
+            "attributes": {
+                "unii": "n.d.",
+                "slug": "clematis-vitalba",
+                "base": 1,
+                "radical": null,
+                "related": null,
+                "name": "Clematis vitalba",
+                "name_en": null
+            },
+            "id": 3270
+        },
+        {
+            "type": "ingredient",
+            "attributes": {
+                "unii": "n.d.",
+                "slug": "complexo-de-vitaminas-antioxidantes",
+                "base": 1,
+                "radical": null,
+                "related": null,
+                "name": "Complexo de vitaminas antioxidantes",
+                "name_en": null
+            },
+            "id": 4524
+        }
+    ],
+    "links": {
+        "self": "https://api.memed.com.br/ingredient"
+    },
+    "meta": {
+        "total": 2
+    }
+}
+```
 
 ### Desativando recursos
 É possível desabilitar algumas funcionalidades da prescrição, basta ao inicializar o Sinapse Prescrição, disparar um comando para o módulo de prescrição:
