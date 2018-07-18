@@ -363,6 +363,16 @@ curl -X GET \
   -H 'Accept: application/vnd.api+json'
 ```
 
+### Visualizando uma prescrição do histórico
+
+![Visualizando uma prescrição do histórico](https://user-images.githubusercontent.com/2197005/42901189-472bf1c6-8aa1-11e8-86fd-9744bffd0c41.png)
+
+Para abrir a tela de visualização de uma prescrição já criada:
+
+```js
+MdHub.command.send('plataforma.prescricao', 'viewPrescription', ID_DA_PRESCRICAO);
+```
+
 ## Trocando de usuário
 
 Caso sua aplicação seja do tipo SPA (Single Page Application) e não faça "refresh" após a ação de login/logout, você pode redefinir o token do usuário logado utilizando o código abaixo:
@@ -412,3 +422,4 @@ curl -X POST \
   }
 }'
 ```
+
