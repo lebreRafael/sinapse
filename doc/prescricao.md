@@ -12,7 +12,7 @@ Sinapse Prescrição é a ferramenta 100% gratuita da Memed que permite o seu si
 
 Clique na imagem abaixo para ver um exemplo de integração:
 
-<p align="center"><a href="https://memeddev.github.io/sinapse/demo-sinapse-prescricao.html" target="_blank"><img src="https://user-images.githubusercontent.com/2197005/38443811-53d52ab6-39c3-11e8-9f7a-a1fb8e6aeafd.png" alt="Memed Sinapse Prescrição Demo" /></a></p>
+<p align="center"><a href="https://memeddev.github.io/sinapse/demo-sinapse-prescricao.html" target="_blank"><img src="https://user-images.githubusercontent.com/2197005/42910640-afbd2fb2-8abe-11e8-9d63-01df904b5271.png" alt="Memed Sinapse Prescrição Demo" /></a></p>
 
 ## Como integrar
 A integração é feita em dois momentos: implementando o cadastro do usuário (profissional da saúde com CRM) via API e depois implementando o Sinapse Prescrição (front-end) dentro de seu sistema.
@@ -423,3 +423,74 @@ curl -X POST \
 }'
 ```
 
+## Customizando a impressão
+
+A Memed permite que o usuário possa alterar várias configurações relacionadas a impressão da prescrição, como margens, cabeçalho, rodapé, fonte e logo. Quando um usuário é criado, são adicionados 4 temas padrão para o usuário, que podem ser customizados via API.
+
+### Alterando as configurações de impressão
+
+```bash
+curl -X POST \
+  'https://api.memed.com.br/v1/opcoes-receituario?token=AQUI_VAI_O_TOKEN_DO_USUARIO' \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "data": {
+    "type": "configuracoes-prescricao",
+    "attributes": {
+      // Um médico possui 4 possíveis temas, o índice pode ser de 1 a 4
+      "indice": 1
+      "margem_esquerda": 1.5,
+      "margem_direita": 1.5,
+      "margem_superior": 1.5,
+      "margem_inferior": 1.5,
+      // Define a configuração como a ativa, que será usada na próxima impressão
+      "ativo": true
+    }
+  }
+}'
+```
+
+### Capturando as configurações de impressão atuais
+
+```bash
+curl -X GET \
+  'https://api.memed.com.br/v1/opcoes-receituario?token=AQUI_VAI_O_TOKEN_DO_USUARIO' \
+  -H 'Accept: application/json'
+```
+
+### Importando cabeçalho/rodapé de um PDF
+
+Como muitas ferramentas já possuem a opção de customização da impressão e que muitas vezes não se encaixam nas opções disponibilizadas pela Memed, criamos uma forma de importar o cabeçalho/rodapé com base em um template enviado para a Memed, que será usado como imagem de fundo na prescrição.
+
+![thumb crop prescricao](https://user-images.githubusercontent.com/2197005/42904636-ff2217ba-8aab-11e8-9d96-13b5efc5b71d.png)
+
+- O parceiro um PDF contendo somente o cabeçalho e rodapé do médico
+- A Memed converte para imagem e faz o recorte
+- As imagens são usadas como fundo da prescrição do médico
+
+Para fazer isso, basta enviar para a API:
+
+```bash
+curl -X POST \
+  'https://api.memed.com.br/v1/opcoes-receituario/upload-template?token=AQUI_VAI_O_TOKEN_DO_USUARIO' \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'content-type: multipart/form-data;' \
+  -F template=@/Caminho/do/Template.pdf
+```
+
+A resposta conterá as imagens recortadas:
+
+```json
+{
+    "data": {
+        "attributes": {
+            "header": "https://link.para.imagem/header.jpeg",
+            "footer": "https://link.para.imagem/footer.jpeg"
+        },
+        "type": "header-footer-images"
+    }
+}
+```
+
+É importante lembrar que o processo acima precisará ser feito para cada médico que utilizará o Sinapse Prescrição.
