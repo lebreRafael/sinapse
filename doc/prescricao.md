@@ -224,6 +224,36 @@ MdHub.command.send('plataforma.prescricao', 'setPaciente', {nome: 'José da Silv
 
 Obs: A Memed identifica os pacientes pelo nome. Em caso de pacientes com nomes iguais, eles serão agrupados. Estamos desenvolvendo uma solução para coletar outros identificadores (cpf, rg...) de forma criptografada junto aos parceiros.
 
+### Desativando recursos
+É possível desabilitar algumas funcionalidades da prescrição, basta ao inicializar o Sinapse Prescrição, disparar um comando para o módulo de prescrição:
+
+```js
+MdHub.command.send('plataforma.prescricao', 'setFeatureToggle', {
+  // Desativa a opção de excluir um paciente
+  deletePatient: false,
+  // Esconde o histórico de prescrições
+  historyPrescription: false,
+  // Esconde o botão "Nova Prescrição"
+  newPrescription: false,
+  // Esconde o botão "Opções Receituário"
+  optionsPrescription: false,
+  // Desabilita a opção de remover/trocar o paciente
+  removePatient: false,
+  // Desabilita a aba "Industrializados" do Autocomplete de medicamentos  
+  autocompleteIndustrialized: false,
+  // Desabilita a aba "Manipulados" do Autocomplete de medicamentos
+  autocompleteManipulated: false,
+  // Desabilita a aba "Composições" do Autocomplete de medicamentos    
+  autocompleteCompositions: false,
+  // Desabilita a aba "Periféricos" do Autocomplete de medicamentos
+  autocompletePeripherals: false,
+  // Esconde o botão "Copiar para Prontuário" (que copia o conteúdo da prescrição para o clipboard)
+  copyMedicalRecords: false,
+  // Esconde o botão de fechar da prescrição
+  buttonClose: false
+});
+```
+
 ### Escutando eventos
 Você pode assinar eventos que são disparados pelos módulos e implementa-los conforme necessidade em sua plataforma.
 
