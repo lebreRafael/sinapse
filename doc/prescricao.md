@@ -410,7 +410,7 @@ A resposta será como a abaixo:
 }
 ```
 
-## Capturando históricos de prescrições
+## Capturando histórico de prescrições
 
 ```bash
 curl -X GET \
@@ -528,8 +528,8 @@ Como muitas ferramentas já possuem a opção de customização da impressão e 
 
 ![thumb crop prescricao](https://user-images.githubusercontent.com/2197005/42904636-ff2217ba-8aab-11e8-9d96-13b5efc5b71d.png)
 
-- O parceiro um PDF contendo somente o cabeçalho e rodapé do médico
-- A Memed converte para imagem e faz o recorte
+- É enviado para a API um PDF contendo somente o cabeçalho e rodapé do médico
+- A Memed converte para imagem e faz o recorte, identificando automaticamente onde começa e termina o cabeçalho/rodapé
 - As imagens são usadas como fundo da prescrição do médico
 
 Para fazer isso, basta enviar para a API:
