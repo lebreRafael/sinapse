@@ -58,15 +58,26 @@ curl -X POST \
   -d '{
      "data": {
        "type": "usuarios",
-         "attributes": {
-           "nome": "José",
-           "data_nascimento": "11/11/2011",
-           "sobrenome": "da Silva",
-             "cpf": "000.000.000-00",
-             "email": "meu@email.com.br",
-             "uf": "SP",
-             "sexo": "M",
-             "crm": "6231232249"
+            "attributes": {
+                // ID do médico na base de dados do seu prontuário/plataforma, útil para identificação posterior
+                // e sincronização com a Memed (opcional)
+                "external_id": ID_EXTERNO,
+                // Nome do Médico (obrigatório)
+                "nome": "José",
+                // Data de nascimento do Médico (opcional)
+                "data_nascimento": "11/11/2011",
+                // Sobrenome do Médico (obrigatório)
+                "sobrenome": "da Silva",
+                // CPF do Médico (obrigatório)
+                "cpf": "000.000.000-00",
+                // Email do Médico (obrigatório)
+                "email": "meu@email.com.br",
+                // Estado do Médico (obrigatório)
+                "uf": "SP",
+                // Sexo do Médico (obrigatório)
+                "sexo": "M",
+                // CRM do Médico (obrigatório)
+                "crm": "6231232249"
            },
            "relationships": {
              "cidade": {
