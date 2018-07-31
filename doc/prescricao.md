@@ -518,6 +518,13 @@ curl -X POST \
       "margem_direita": 1.5,
       "margem_superior": 1.5,
       "margem_inferior": 1.5,
+      // Campos utilizados durante a impressão do receituário de alto custo.
+      // São colocados no tema pelo fato do médico poder atender em múltiplos locais,
+      // variando assim as informações abaixo
+      "nome_medico": "José da Silva",
+      "endereco_medico": "Rua da Saúde, 123",
+      "cidade_medico": "São Paulo",
+      "telefone_medico": "(11) 91234-5678",
       // Define a configuração como a ativa, que será usada na próxima impressão
       "ativo": true
     }
