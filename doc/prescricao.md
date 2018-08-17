@@ -313,11 +313,11 @@ MdHub.command.send('plataforma.prescricao', 'setFeatureToggle', {
   optionsPrescription: false,
   // Desabilita a opção de remover/trocar o paciente
   removePatient: false,
-  // Desabilita a aba "Industrializados" do Autocomplete de medicamentos  
+  // Desabilita a aba "Industrializados" do Autocomplete de medicamentos
   autocompleteIndustrialized: false,
   // Desabilita a aba "Manipulados" do Autocomplete de medicamentos
   autocompleteManipulated: false,
-  // Desabilita a aba "Composições" do Autocomplete de medicamentos    
+  // Desabilita a aba "Composições" do Autocomplete de medicamentos
   autocompleteCompositions: false,
   // Desabilita a aba "Periféricos" do Autocomplete de medicamentos
   autocompletePeripherals: false,
@@ -328,6 +328,37 @@ MdHub.command.send('plataforma.prescricao', 'setFeatureToggle', {
 });
 ```
 
+### Dados de impressão adicionais (Opcional)
+É possível colocar dados extras no cabeçalho e rodapé da prescrição, só enviar para o comando `setAdditionalData`, duas chaves `header` e `footer`.
+
+Exemplo:
+
+```js
+MdHub.command.send('plataforma.prescricao', 'setAdditionalData', {
+    // Campos de exemplo para sair na impressão.
+    "header": [
+        // cada item do array se transforma em uma linha.
+        {
+            "Registro": "1231212",
+            "Paciente": "Nome do paciente"
+        },
+        {
+            "Sexo": "Masculino",
+            "Estado Civil": "Solteiro",
+            "Data de Nasc": "17\/09\/1991"
+        },
+        {
+            "Endereço": "Rua  Arthur prado, 513"
+        },
+        {
+            "Profissional": "Dra. Emilia Reis(CRM: 123456SP)"
+        }
+    ],
+    // Para pular de linha no ropapé, envie a string com um "\n"
+    'footer' => "Rodapé da prescrição \n Segunda linha do rodapé",
+});
+```
+
 ### Escutando eventos
 Você pode assinar eventos que são disparados pelos módulos e implementa-los conforme necessidade em sua plataforma.
 
@@ -335,10 +366,10 @@ Você pode assinar eventos que são disparados pelos módulos e implementa-los c
 Os módulos da Memed emitem eventos quando inicializados, podendo ser capturados da seguinte forma:
 
 ```js
-MdHub.event.add('core:moduleInit', function moduleInitHandler(module) { 
+MdSinapsePrescricao.event.add('core:moduleInit', function moduleInitHandler(module) {
   if (module.name === 'plataforma.prescricao') {
     // Módulo de prescrição inicializado
-  } 
+  }
 });
 ```
 
@@ -357,7 +388,7 @@ MdSinapsePrescricao.event.add(
 #### Quando um medicamento for adicionado
 Caso queira capturar os dados do medicamento inserido, você pode adicionar um callback javascript:
 ```js
-MdSinapsePrescricao.event.add('medicamentoAdicionado', function callback(medicamento) {
+MdHub.event.add('medicamentoAdicionado', function callback(medicamento) {
   // O objeto medicamento:
   // {
   //    "alto_custo":false,
@@ -445,6 +476,18 @@ Para abrir a tela de visualização de uma prescrição já criada:
 
 ```js
 MdHub.command.send('plataforma.prescricao', 'viewPrescription', ID_DA_PRESCRICAO);
+```
+
+## Remover uma prescrição
+
+No back-end, para deletar uma prescrição, basta enviar um request para a API da Memed, com o ID da prescrição e o token do usuário:
+
+```bash
+
+curl -X DELETE \
+  'http://api.memed.com.br/v1/prescricoes/AQUI_VAI_O_ID_DA_PRESCRICAO?token=AQUI_VAI_O_TOKEN_DO_USUARIO' \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'Cache-Control: no-cache'
 ```
 
 ## Trocando de usuário
