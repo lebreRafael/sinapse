@@ -583,6 +583,14 @@ curl -X GET \
   -H 'Accept: application/json'
 ```
 
+### Capturando o PDF da prescrição
+
+```bash
+curl -X GET \
+ 'https://api.memed.com.br/v1/prescricoes/pdf/AQUI_VAI_O_ID_DA_PRESCRICAO?token=AQUI_VAI_O_TOKEN_DO_USUARIO&imprimir[exames]=true&imprimir[formulario_alto_custo]=true&imprimir[formulario_alto_custo_termo]=&imprimir[receituario_controle_especial]=true&imprimir[receituario_controle_especial_antibioticos]=true&imprimir[receituario_controle_especial_c4]=true&imprimir[receituario_simples]=true&opcoes[formulario_alto_custo]=true&opcoes[receituario_controle_especial]=true&opcoes[receituario_controle_especial_antibioticos]=true&opcoes[receituario_controle_especial_c4]=true'
+
+```
+
 ### Importando cabeçalho/rodapé de um PDF
 
 Como muitas ferramentas já possuem a opção de customização da impressão e que muitas vezes não se encaixam nas opções disponibilizadas pela Memed, criamos uma forma de importar o cabeçalho/rodapé com base em um template enviado para a Memed, que será usado como imagem de fundo na prescrição.
