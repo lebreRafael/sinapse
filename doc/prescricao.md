@@ -128,14 +128,14 @@ curl -X GET -H "Accept: application/json" "http://api.memed.com.br/v1/cidades?fi
 
 ```curl
 curl -X GET \
-  'https://api.memed.com.br/v1/sinapse-prescricao/usuarios/CRM-DO-USUARIO?api-key=API-KEY&secret-key=SECRET-KEY' \
+  'https://api.memed.com.br/v1/sinapse-prescricao/usuarios/CODIGO-DO-USUARIO?api-key=API-KEY&secret-key=SECRET-KEY' \
   -H 'Accept: application/vnd.api+json'
 ```
 
 ```
 Parâmetros da URL:
 
-CRM-DO-USUARIO - Número + UF (ex: "123456SP")
+CODIGO-DO-USUARIO = CRM Número + UF (ex: "123456SP") ou ID_EXTERNO enviado durante o cadastro
 ```
 
 O retorno do request conterá os dados:
