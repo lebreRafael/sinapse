@@ -2,11 +2,12 @@
 
 Sinapse Prescrição é a ferramenta 100% gratuita da Memed que permite o seu site/plataforma/prontuário ter uma prescrição inteligente com diversas funcionalidades:
 
-- Protocolos - Praticidade e velocidade na rotina de atendimentos.
-- Minhas Posologias - Agilidade para o médico prescrever com base em seus histórico.
-- Impressão inteligente - Regras de impressão, controle de margem, logo customizado e impressão automática de receituários especiais.
-- Envio por SMS - Facilita a vida do paciente, entregando agilidade e permitindo a comparação de preços.
-- Banco de medicamentos - O mais completo do Brasil, com informações constantemente curadas pela nossa equipe.
+- Protocolos - Praticidade e velocidade na rotina de atendimentos;
+- Minhas Posologias - Agilidade para o médico prescrever com base em seus histórico;
+- Impressão inteligente - Regras de impressão, controle de margem, logo customizado e impressão automática de receituários especiais;
+- Envio por SMS - Facilita a vida do paciente, entregando agilidade e permitindo a comparação de preços;
+- Banco de medicamentos - O mais completo do Brasil, com informações constantemente curadas pela nossa equipe;
+- Banco de exames - Códigos SUS e TUSS de mais de 2.800 exames integrados em suas solicitações que evitam glosas e retornos desnecessários.
 
 ## Demonstração
 
@@ -15,7 +16,9 @@ Clique na imagem abaixo para ver um exemplo de integração:
 <p align="center"><a href="https://memeddev.github.io/sinapse/demo-sinapse-prescricao.html" target="_blank"><img src="https://user-images.githubusercontent.com/2197005/42910640-afbd2fb2-8abe-11e8-9d63-01df904b5271.png" alt="Memed Sinapse Prescrição Demo" /></a></p>
 
 ## Como integrar
-A integração é feita em dois momentos: implementando o cadastro do usuário (profissional da saúde com CRM) via API e depois implementando o Sinapse Prescrição (front-end) dentro de seu sistema.
+A integração é feita em dois momentos: 
+- Implementando o cadastro do usuário (profissional da saúde com CRM) via API;
+- Implementando o Sinapse Prescrição (front-end) dentro de seu sistema.
 Logo no primeiro acesso do usuário, o mesmo deverá aceitar os termos de condições e então poderá acessar o Sinapse Prescrição.
 
 ### Chaves de acesso
@@ -25,30 +28,30 @@ A Memed disponibiliza duas chaves de acesso:
 - **SECRET-KEY** - Chave privada, deve ficar somente no back-end. Quando usada junto com a API-KEY, permite o envio de prescrições.
 
 ### Servidor para testes/homologação
-Caso queira fazer um teste de integração, disponibilizamos um servidor com um banco de dados reduzido. Para utilizá-lo, substitua os domínios pelo dos servidores de teste:
+Recomendamos realizar testes de integração. Para isso, disponibilizamos uma API para testes de integração com um banco de dados reduzido. Para utilizá-lo, substitua os domínios pelo dos servidores de teste:
 
 | Domínio de produção | Domínio de teste |
 |---------------------|------------------|
 |memed.com.br|integracao.memed.com.br|
 |api.memed.com.br|integracao.api.memed.com.br|
 
-Para acessar alguns recursos na API de teste, utilize as chaves abaixo:
+Para acessar alguns recursos na API de testes, utilize as chaves abaixo:
 
 |   | Chaves de acesso |
 |---|--------------------|
 |API-KEY|iJGiB4kjDGOLeDFPWMG3no9VnN7Abpqe3w1jEFm6olkhkZD6oSfSmYCm|
 |SECRET-KEY|Xe8M5GvBGCr4FStKfxXKisRo3SfYKI7KrTMkJpCAstzu2yXVN4av5nmL|
 
-> **Atenção**: O banco de dados é limpo após alguns dias. Não envie qualquer dado sensível nesse servidor, outras pessoas irão acessá-lo.
+> **Atenção**: O banco de dados é limpo periodicamente. Não envie qualquer dado sensível para o ambiente de testes, outras pessoas irão acessá-lo.
 
 ### Integrando com a API
 Para que o usuário (profissional da saúde com CRM) possa utilizar a prescrição da Memed, é necessário cadastrá-lo no banco de dados da Memed, seguindo o fluxo abaixo:
 
-- O parceiro envia um request (especificado mais abaixo) com os dados do usuário para a Memed
-- A Memed responde com um token e um ID de usuário
-- O parceiro armazena o token e o ID em seu banco, para usar futuramente nas integrações
+- O parceiro envia um REQUEST (especificado mais abaixo) com os dados do usuário para a Memed;
+- A Memed responde com um _token_ e um ID de usuário;
+- O parceiro armazena o token e o ID em seu banco, para usar futuramente nas integrações.
 
-Exemplo do request usando cURL:
+Exemplo do REQUEST usando cURL:
 ```curl
 curl -X POST \
   'https://api.memed.com.br/v1/sinapse-prescricao/usuarios?api-key=API-KEY&secret-key=SECRET-KEY' \
@@ -56,38 +59,41 @@ curl -X POST \
   -H 'Cache-Control: no-cache' \
   -H 'Content-Type: application/json' \
   -d '{
-     "data": {
-       "type": "usuarios",
-            "attributes": {
-                // ID do médico na base de dados do seu prontuário/plataforma, útil para identificação posterior
-                // e sincronização com a Memed (opcional)
-                "external_id": ID_EXTERNO,
-                // Nome do Médico (obrigatório)
-                "nome": "José",
-                // Data de nascimento do Médico (opcional)
-                "data_nascimento": "11/11/2011",
-                // Sobrenome do Médico (obrigatório)
-                "sobrenome": "da Silva",
-                // CPF do Médico (obrigatório)
-                "cpf": "000.000.000-00",
-                // Email do Médico (obrigatório)
-                "email": "meu@email.com.br",
-                // Estado do Médico (obrigatório)
-                "uf": "SP",
-                // Sexo do Médico (obrigatório)
-                "sexo": "M",
-                // CRM do Médico (obrigatório)
-                "crm": "6231232249"
-           },
-           "relationships": {
-             "cidade": {
-                "data": { "type": "cidades", "id": "5213" }
-              },
-             "especialidade": {
-                "data": { "type": "especialidades", "id": "50" }
-              }
-           }
-      }
+        "data": {
+         "type": "usuarios",
+          "attributes": {
+              // ID do médico na base de dados do seu prontuário/plataforma,
+              // útil para identificação posterior e sincronização com a Memed 
+              // (opcional, mas recomendado)
+              "external_id": ID_EXTERNO,
+              // Nome do Médico (obrigatório)
+              "nome": "José",
+              // Data de nascimento do Médico (opcional)
+              "data_nascimento": "11/11/2011",
+              // Sobrenome do Médico (obrigatório)
+              "sobrenome": "da Silva",
+              // CPF do Médico (obrigatório)
+              "cpf": "000.000.000-00",
+              // Email do Médico (obrigatório)
+              "email": "meu@email.com.br",
+              // Estado do Médico (obrigatório)
+              "uf": "SP",
+              // Sexo do Médico (obrigatório)
+              "sexo": "M",
+              // CRM do Médico (obrigatório)
+              "crm": "6231232249"
+          },
+          "relationships": {
+          // Cidade do profissional (recomendado)
+           "cidade": {
+              "data": { "type": "cidades", "id": "5213" }
+            },
+            // Especialidade do profissional: Clínica médica, Oftalmologia, etc. (obrigatório)
+           "especialidade": {
+              "data": { "type": "especialidades", "id": "50" }
+            }
+          }
+        }
  }'
 ```
 
@@ -95,7 +101,7 @@ Veja abaixo uma descrição de cada atributo, TODOS SÃO OBRIGATÓRIOS:
 ```
 Atributos do usuário:
 
-nome - Nome do usuário
+nome - Nome do usuário (apenas o primeiro nome)
 sobrenome - Sobrenome do usuário
 data_nascimento - Data de nascimento do usuário, no padrão brasileiro (DD/MM/YYYY)
 cpf - CPF do usuário, com pontuação (XXX.XXX.XXX-XX)
@@ -110,7 +116,7 @@ cidade (relationships.cidade.id) - ID da cidade que o usuário atende
 especialidade (relationships.especialidade.id) - ID da especialidade do usuário
 ```
 
-Para encontrar os IDs da cidade e especialidade, é necessário fazer dois requests:
+Para encontrar os IDs da cidade e da especialidade, é necessário fazer dois REQUESTs:
 
 Lista de todas as especialidades
 ```
@@ -122,9 +128,9 @@ Lista de cidades, filtradas por um nome
 curl -X GET -H "Accept: application/json" "http://api.memed.com.br/v1/cidades?filter[q]=Campinas"
 ```
 
-#### Recuperando o token de um usuário
+#### Recuperando o token de um usuário previamente cadastrado
 
-É possível ver todas as informações de um usuário, incluindo o token, através do request abaixo:
+É possível ver todas as informações de um usuário, incluindo o token, através do REQUEST abaixo:
 
 ```curl
 curl -X GET \
@@ -138,7 +144,7 @@ Parâmetros da URL:
 CODIGO-DO-USUARIO = CRM Número + UF (ex: "123456SP") ou ID_EXTERNO enviado durante o cadastro
 ```
 
-O retorno do request conterá os dados:
+O retorno do REQUEST conterá a estrutura abaixo:
 
 ```json
 {
@@ -147,7 +153,7 @@ O retorno do request conterá os dados:
         "attributes": {
             "nome": "João",
             "sobrenome": "da Silva",
-            "cpf": "00000000000",
+            "cpf": "000.000.000-00",
             "email": "joao@dasilva.com.br",
             "data_nascimento": "01/01/1900",
             "sexo": "M",
@@ -199,14 +205,14 @@ O retorno do request conterá os dados:
 ```
 
 ## Integrando com o front-end
-Para integrar o módulo de prescricão em sua plataforma é necessário definir um elemento com id `memed-prescricao` e depois incluir o script que irá carregar as dependências necessárias:
+Para integrar o módulo de prescricão em sua plataforma é necessário definir um elemento com id `memed-prescricao` e depois incluir o _script_ que irá carregar as dependências necessárias:
 
 ```
 <a href="#" id="memed-prescricao">Prescrever</a>
 
 <script
     type="text/javascript"
-    src="http://memed.com.br/modulos/plataforma.sinapse-prescricao/build/sinapse-prescricao.min.js"
+    src="https://memed.com.br/modulos/plataforma.sinapse-prescricao/build/sinapse-prescricao.min.js"
     data-token="TOKEN_DO_USUARIO_OBTIDO_NO_CADASTRO_VIA_API"
     data-color="#576cff">
 </script>
@@ -239,17 +245,17 @@ MdHub.command.send('plataforma.prescricao', 'setPaciente', {
   cidade: 'São Paulo',
   // Telefone (opcional, DDD + digitos, somente números)
   telefone: '11012345678',
-  // ID do paciente na base de dados do seu prontuário/plataforma, útil para identificação posterior
-  // e sincronização com a Memed
+  // ID do paciente na base de dados do seu prontuário/plataforma,
+  // útil para identificação posterior e sincronização com a Memed
   idExterno: 123,
   // Array de princípios ativos que o paciente possui alergia
   allergy: [20, 31, 42]
 });
 ```
 
-Obs: A Memed identifica os pacientes pelo nome. Em caso de pacientes com nomes iguais, eles serão agrupados, a não ser que seja definido o atributo "idExterno".
+Obs: A Memed identifica os pacientes pelo nome. Em caso de pacientes com nomes iguais, eles serão agrupados. Para evitar esse comportamento, basta definir o atributo "idExterno".
 
-Para buscar os princípios ativos utilizados na detecção de alergias, usando a API da Memed:
+Para buscar os princípios ativos utilizados na detecção de alergias, use o REQUEST abaixo:
 
 ```bash
 curl -X GET \
@@ -299,7 +305,7 @@ Exemplo de resposta:
 ```
 
 ### Desativando recursos
-É possível desabilitar algumas funcionalidades da prescrição, basta ao inicializar o Sinapse Prescrição, disparar um comando para o módulo de prescrição:
+É possível desabilitar algumas funcionalidades da prescrição. Para isso, após inicializar o Sinapse Prescrição, dispare o comando abaixo para o módulo de prescrição:
 
 ```js
 MdHub.command.send('plataforma.prescricao', 'setFeatureToggle', {
@@ -311,11 +317,11 @@ MdHub.command.send('plataforma.prescricao', 'setFeatureToggle', {
   newPrescription: false,
   // Esconde o botão "Opções Receituário"
   optionsPrescription: false,
-  // Desabilita a opção de remover/trocar o paciente
+  // Desabilita a opção de remover/trocar o paciente selecionado
   removePatient: false,
   // Esconde a modal de confirmação dos dados do paciente para receituário de controle especial
-  // caso venha `setado` a cidade e endereço.
-  askPatientDetails: true,
+  // caso a cidade e o endereço tenham sido definidos com o comando `setPaciente`
+  askPatientDetails: false,
   // Desabilita a aba "Industrializados" do Autocomplete de medicamentos
   autocompleteIndustrialized: false,
   // Desabilita a aba "Manipulados" do Autocomplete de medicamentos
@@ -363,7 +369,7 @@ MdHub.command.send('plataforma.prescricao', 'setAdditionalData', {
 ```
 
 ### Escutando eventos
-Você pode assinar eventos que são disparados pelos módulos e implementa-los conforme necessidade em sua plataforma.
+Você pode assinar eventos que são disparados pelos módulos e implementá-los conforme necessidade em sua plataforma.
 
 #### Quando o módulo de prescrição terminou de carregar
 Os módulos da Memed emitem eventos quando inicializados, podendo ser capturados da seguinte forma:
@@ -389,7 +395,7 @@ MdSinapsePrescricao.event.add(
 ```
 
 #### Quando um medicamento for adicionado
-Caso queira capturar os dados do medicamento inserido, você pode adicionar um callback javascript:
+Caso queira capturar os dados do medicamento inserido, você pode adicionar um _callback_ Javascript:
 ```js
 MdHub.event.add('medicamentoAdicionado', function callback(medicamento) {
   // O objeto medicamento:
@@ -407,11 +413,11 @@ MdHub.event.add('medicamentoAdicionado', function callback(medicamento) {
   //  }
 });
 ```
-## Capturando uma prescrição
 
+## Capturando uma prescrição
 Quando o usuário terminar uma prescrição, é possível capturar o ID da mesma, assim como pedir mais informações, através de um evento:
 
-```javascript
+```js
 MdHub.event.add('prescricaoSalva', function prescricaoSalvaCallback(idPrescricao) {
 	// Aqui é possível enviar esse ID para seu back-end obter mais informações
 	funcaoParaEnviarParaBackendObterMaisInformacoes(idPrescricao);
@@ -483,7 +489,7 @@ MdHub.command.send('plataforma.prescricao', 'viewPrescription', ID_DA_PRESCRICAO
 
 ## Remover uma prescrição
 
-No back-end, para deletar uma prescrição, basta enviar um request para a API da Memed, com o ID da prescrição e o token do usuário:
+No back-end, para deletar uma prescrição, basta enviar um REQUEST para a API da Memed, com o ID da prescrição e o _token_ do usuário:
 
 ```bash
 
@@ -495,13 +501,14 @@ curl -X DELETE \
 
 ## Trocando de usuário
 
-Caso sua aplicação seja do tipo SPA (Single Page Application) e não faça "refresh" após a ação de login/logout, você pode redefinir o token do usuário logado utilizando o código abaixo:
+Caso sua aplicação seja do tipo SPA (Single Page Application) e não faça _refresh_ após a ação de login/logout, você pode redefinir o _token_ do usuário logado utilizando o código abaixo:
 
 ```js
 MdSinapsePrescricao.setToken('TOKEN_DO_NOVO_USUARIO');
 ```
 
-Obs: A função acima causará o recarregamento dos iframes. A Memed somenta suporta os navegadores modernos (IE 11+), verifique se para os usuários do seu sistema, a atualização dos iframes ocorre corretamente.
+Obs. 1: A função acima causará o recarregamento dos _iframes_. Verifique se para os usuários do seu sistema, a atualização dos _iframes_ ocorre corretamente
+Obs. 2: A plataforma da Memed somenta suporta os navegadores modernos (IE 11+).
 
 ## Cadastrando protocolos para o usuário
 
@@ -545,7 +552,8 @@ curl -X POST \
 
 ## Customizando a impressão
 
-A Memed permite que o usuário possa alterar várias configurações relacionadas a impressão da prescrição, como margens, cabeçalho, rodapé, fonte e logo. Quando um usuário é criado, são adicionados 4 temas padrão para o usuário, que podem ser customizados via API.
+- A Memed permite que o usuário possa alterar várias configurações relacionadas à impressão da prescrição como, por exemplo, margens, cabeçalho, rodapé, fonte e logo;
+- Quando um usuário é criado, são adicionados 4 (quatro) temas padrão para o usuário, que podem ser customizados via API.
 
 ### Alterando as configurações de impressão
 
@@ -600,9 +608,9 @@ Como muitas ferramentas já possuem a opção de customização da impressão e 
 
 ![thumb crop prescricao](https://user-images.githubusercontent.com/2197005/42904636-ff2217ba-8aab-11e8-9d96-13b5efc5b71d.png)
 
-- É enviado para a API um PDF contendo somente o cabeçalho e rodapé do médico
-- A Memed converte para imagem e faz o recorte, identificando automaticamente onde começa e termina o cabeçalho/rodapé
-- As imagens são usadas como fundo da prescrição do médico
+- É enviado para a API um PDF contendo somente o cabeçalho e rodapé do médico;
+- A Memed converte para imagem e faz o recorte, identificando automaticamente onde começa e termina o cabeçalho/rodapé;
+- As imagens são usadas como fundo da prescrição do médico.
 
 Para fazer isso, basta enviar para a API:
 
