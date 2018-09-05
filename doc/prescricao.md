@@ -508,6 +508,7 @@ MdSinapsePrescricao.setToken('TOKEN_DO_NOVO_USUARIO');
 ```
 
 Obs. 1: A função acima causará o recarregamento dos _iframes_. Verifique se para os usuários do seu sistema, a atualização dos _iframes_ ocorre corretamente
+
 Obs. 2: A plataforma da Memed somenta suporta os navegadores modernos (IE 11+).
 
 ## Cadastrando protocolos para o usuário
