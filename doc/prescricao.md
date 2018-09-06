@@ -17,14 +17,19 @@ Clique na imagem abaixo para ver um exemplo de integração:
 
 ## Como integrar
 A integração é feita em dois momentos: 
-- Implementando o cadastro do usuário (profissional da saúde com CRM) via API;
+- Implementando o cadastro do usuário (profissional da saúde) via API;
 - Implementando o Sinapse Prescrição (front-end) dentro de seu sistema.
-Logo no primeiro acesso do usuário, o mesmo deverá aceitar os termos de condições e então poderá acessar o Sinapse Prescrição.
+
+Logo no primeiro acesso do usuário, o mesmo deverá aceitar os termos e condições de uso, e então poderá acessar o Sinapse Prescrição.
+
+> A plataforma da Memed somenta suporta navegadores modernos (IE 11+, Google Chrome, Mozilla Firefox).
+
+> Recomendamos que o desenvolvedor responsável pela integração tenha noção básica de Javascript, _Event Sourcing_ e _Callback_.
 
 ### Chaves de acesso
 A Memed disponibiliza duas chaves de acesso:
 
-- **API-KEY** - Chave pública, pode aparecer no front-end. Permite a aplicação acessar os serviços de busca e cadastro de usuário.
+- **API-KEY** - Chave pública, pode aparecer no front-end. Permite a aplicação acessar os serviços de busca e cadastro de usuário;
 - **SECRET-KEY** - Chave privada, deve ficar somente no back-end. Quando usada junto com a API-KEY, permite o envio de prescrições.
 
 ### Servidor para testes/homologação
@@ -47,11 +52,11 @@ Para acessar alguns recursos na API de testes, utilize as chaves abaixo:
 ### Integrando com a API
 Para que o usuário (profissional da saúde com CRM) possa utilizar a prescrição da Memed, é necessário cadastrá-lo no banco de dados da Memed, seguindo o fluxo abaixo:
 
-- O parceiro envia um REQUEST (especificado mais abaixo) com os dados do usuário para a Memed;
-- A Memed responde com um _token_ e um ID de usuário;
-- O parceiro armazena o token e o ID em seu banco, para usar futuramente nas integrações.
+- O parceiro envia um `REQUEST` (especificado mais abaixo) com os dados do usuário para a Memed;
+- A Memed responde com um `token` e um ID de usuário;
+- O parceiro armazena o `token` e o ID em seu banco, para usar futuramente nas integrações.
 
-Exemplo do REQUEST usando cURL:
+Exemplo do `REQUEST` usando **cURL**:
 ```curl
 curl -X POST \
   'https://api.memed.com.br/v1/sinapse-prescricao/usuarios?api-key=API-KEY&secret-key=SECRET-KEY' \
@@ -97,7 +102,7 @@ curl -X POST \
  }'
 ```
 
-Veja abaixo uma descrição de cada atributo, TODOS SÃO OBRIGATÓRIOS:
+Veja abaixo uma descrição de cada atributo (**todos são obrigatórios**):
 ```
 Atributos do usuário:
 
@@ -205,7 +210,7 @@ O retorno do REQUEST conterá a estrutura abaixo:
 ```
 
 ## Integrando com o front-end
-Para integrar o módulo de prescricão em sua plataforma é necessário definir um elemento com id `memed-prescricao` e depois incluir o _script_ que irá carregar as dependências necessárias:
+Para integrar o módulo de prescricão em sua plataforma é necessário definir um elemento com id `memed-prescricao` e depois incluir o `script` que irá carregar as dependências necessárias:
 
 ```
 <a href="#" id="memed-prescricao">Prescrever</a>
@@ -253,7 +258,7 @@ MdHub.command.send('plataforma.prescricao', 'setPaciente', {
 });
 ```
 
-Obs: A Memed identifica os pacientes pelo nome. Em caso de pacientes com nomes iguais, eles serão agrupados. Para evitar esse comportamento, basta definir o atributo "idExterno".
+> A Memed identifica os pacientes pelo nome. Em caso de pacientes com nomes iguais, eles serão agrupados. Para evitar esse comportamento, basta definir o atributo "idExterno", o qual será usado para identificar unicamente o paciente.
 
 Para buscar os princípios ativos utilizados na detecção de alergias, use o REQUEST abaixo:
 
@@ -305,7 +310,7 @@ Exemplo de resposta:
 ```
 
 ### Desativando recursos
-É possível desabilitar algumas funcionalidades da prescrição. Para isso, após inicializar o Sinapse Prescrição, dispare o comando abaixo para o módulo de prescrição:
+É possível customizar algumas funcionalidades e características da prescrição. Para isso, você pode usar o comando `setFeatureToggle` após inicializar o Sinapse Prescrição. Veja abaixo as opções disponíveis:
 
 ```js
 MdHub.command.send('plataforma.prescricao', 'setFeatureToggle', {
@@ -317,7 +322,7 @@ MdHub.command.send('plataforma.prescricao', 'setFeatureToggle', {
   newPrescription: false,
   // Esconde o botão "Opções Receituário"
   optionsPrescription: false,
-  // Desabilita a opção de remover/trocar o paciente selecionado
+  // Desabilita a opção de remover/trocar o paciente
   removePatient: false,
   // Esconde a modal de confirmação dos dados do paciente para receituário de controle especial
   // caso a cidade e o endereço tenham sido definidos com o comando `setPaciente`
@@ -395,7 +400,7 @@ MdSinapsePrescricao.event.add(
 ```
 
 #### Quando um medicamento for adicionado
-Caso queira capturar os dados do medicamento inserido, você pode adicionar um _callback_ Javascript:
+Caso queira capturar os dados do medicamento inserido, você pode adicionar um `callback`:
 ```js
 MdHub.event.add('medicamentoAdicionado', function callback(medicamento) {
   // O objeto medicamento:
@@ -507,9 +512,7 @@ Caso sua aplicação seja do tipo SPA (Single Page Application) e não faça _re
 MdSinapsePrescricao.setToken('TOKEN_DO_NOVO_USUARIO');
 ```
 
-Obs. 1: A função acima causará o recarregamento dos _iframes_. Verifique se para os usuários do seu sistema, a atualização dos _iframes_ ocorre corretamente
-
-Obs. 2: A plataforma da Memed somenta suporta os navegadores modernos (IE 11+).
+> A função acima causará o recarregamento dos [iframes](https://www.w3schools.com/html/html_iframe.asp). Verifique se para os usuários do seu sistema, a atualização dos `iframes` ocorre corretamente.
 
 ## Cadastrando protocolos para o usuário
 
@@ -553,8 +556,8 @@ curl -X POST \
 
 ## Customizando a impressão
 
-- A Memed permite que o usuário possa alterar várias configurações relacionadas à impressão da prescrição como, por exemplo, margens, cabeçalho, rodapé, fonte e logo;
-- Quando um usuário é criado, são adicionados 4 (quatro) temas padrão para o usuário, que podem ser customizados via API.
+- Quando um usuário é criado, são adicionados 4 (quatro) temas padrão para o usuário, que podem ser customizados via API;
+- A Memed permite que o usuário possa alterar várias configurações relacionadas à impressão da prescrição como, por exemplo, margens, cabeçalho, rodapé, fonte e logo.
 
 ### Alterando as configurações de impressão
 
@@ -637,4 +640,4 @@ A resposta conterá as imagens recortadas:
 }
 ```
 
-É importante lembrar que o processo acima precisará ser feito para cada médico que utilizará o Sinapse Prescrição.
+> É importante lembrar que o processo acima precisará ser feito para cada médico que utilizará o Sinapse Prescrição.
