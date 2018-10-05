@@ -238,7 +238,7 @@ MdHub.module.hide('plataforma.prescricao');
 ```
 
 ### Definindo o paciente
-Para definir o paciente, basta disparar um comando para o módulo de prescrição, como no exemplo abaixo:
+- Para definir o paciente, basta disparar um comando para o módulo de prescrição, como no exemplo abaixo:
 
 ```js
 MdHub.command.send('plataforma.prescricao', 'setPaciente', {
@@ -252,15 +252,23 @@ MdHub.command.send('plataforma.prescricao', 'setPaciente', {
   telefone: '11012345678',
   // ID do paciente na base de dados do seu prontuário/plataforma,
   // útil para identificação posterior e sincronização com a Memed
-  idExterno: 123,
-  // Array de princípios ativos que o paciente possui alergia
-  allergy: [20, 31, 42]
+  idExterno: 123
 });
 ```
-
 > A Memed identifica os pacientes pelo nome. Em caso de pacientes com nomes iguais, eles serão agrupados. Para evitar esse comportamento, basta definir o atributo "idExterno", o qual será usado para identificar unicamente o paciente.
 
-Para buscar os princípios ativos utilizados na detecção de alergias, use o REQUEST abaixo:
+> _Importante:_ as alergias eram definidas pelo comando `setPaciente`, agora há um comando específico para essa finalidade.
+
+- Para definir as alergias de um paciente, utilize o comando abaixo:
+```js
+// o terceiro argumento é um array de IDs de princípios ativos
+MdHub.command.send('plataforma.prescricao', 'setAllergy', [
+  174,
+  219
+]);
+```
+
+- Para buscar os princípios ativos utilizados na detecção de alergias, use o REQUEST abaixo:
 
 ```bash
 curl -X GET \
