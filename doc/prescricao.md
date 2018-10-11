@@ -340,9 +340,11 @@ MdHub.command.send('plataforma.prescricao', 'setFeatureToggle', {
   optionsPrescription: false,
   // Desabilita a opção de remover/trocar o paciente
   removePatient: false,
-  // Esconde a modal de confirmação dos dados do paciente para receituário de controle especial
+  // Esconde o formulário de confirmação dos dados do paciente para receituário de controle especial
   // caso a cidade e o endereço tenham sido definidos com o comando `setPaciente`
-  askPatientDetails: false,
+  editPatient: false,
+  // Desabilita a opção para definir alergias para o paciente
+  setPatientAllergy: false,
   // Desabilita a aba "Exames" do Autocomplete de medicamentos
   autocompleteExams: false,
   // Desabilita a aba "Industrializados" do Autocomplete de medicamentos
