@@ -343,6 +343,8 @@ MdHub.command.send('plataforma.prescricao', 'setFeatureToggle', {
   // Esconde a modal de confirmação dos dados do paciente para receituário de controle especial
   // caso a cidade e o endereço tenham sido definidos com o comando `setPaciente`
   askPatientDetails: false,
+  // Desabilita a aba "Exames" do Autocomplete de medicamentos
+  autocompleteExams: false,
   // Desabilita a aba "Industrializados" do Autocomplete de medicamentos
   autocompleteIndustrialized: false,
   // Desabilita a aba "Manipulados" do Autocomplete de medicamentos
