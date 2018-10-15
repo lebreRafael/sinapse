@@ -330,16 +330,16 @@ Exemplo de resposta:
 
 ```js
 MdHub.command.send('plataforma.prescricao', 'setFeatureToggle', {
-  // Desativa a opção de excluir um paciente
-  deletePatient: false,
+  // Se definido como `false` desativa a opção de excluir um paciente
+  deletePatient: true,
   // Esconde o histórico de prescrições
   historyPrescription: false,
   // Esconde o botão "Nova Prescrição"
   newPrescription: false,
   // Esconde o botão "Opções Receituário"
   optionsPrescription: false,
-  // Desabilita a opção de remover/trocar o paciente
-  removePatient: false,
+  // Se definido como `false` desabilita a opção de remover/trocar o paciente
+  removePatient: true,
   // Esconde o formulário de confirmação dos dados do paciente para receituário de controle especial
   // caso a cidade e o endereço tenham sido definidos com o comando `setPaciente`
   editPatient: false,
