@@ -16,7 +16,7 @@ Clique na imagem abaixo para ver um exemplo de integração:
 <p align="center"><a href="https://memeddev.github.io/sinapse/demo-sinapse-prescricao.html" target="_blank"><img src="https://user-images.githubusercontent.com/2197005/42910640-afbd2fb2-8abe-11e8-9d63-01df904b5271.png" alt="Memed Sinapse Prescrição Demo" /></a></p>
 
 ## Como integrar
-A integração é feita em dois momentos: 
+A integração é feita em dois momentos:
 - Implementando o cadastro ou autenticação do usuário (profissional da saúde) via API;
 - Implementando o Sinapse Prescrição (_front-end_) dentro de seu sistema.
 
@@ -71,7 +71,7 @@ curl -X POST \
          "type": "usuarios",
           "attributes": {
               // ID do usuário/médico na base de dados do seu prontuário/plataforma
-              // útil para identificação posterior e sincronização com a Memed 
+              // útil para identificação posterior e sincronização com a Memed
               // (obrigatório)
               "external_id": ID_EXTERNO,
               // Nome do Médico (obrigatório)
@@ -330,6 +330,8 @@ Exemplo de resposta:
 
 ```js
 MdHub.command.send('plataforma.prescricao', 'setFeatureToggle', {
+  // Habilita o envio de SMS automático para o paciente no momento em que a receita é gerada
+  alwaysSendSMS: false,
   // Desativa a opção de excluir um paciente
   deletePatient: false,
   // Esconde o histórico de prescrições
