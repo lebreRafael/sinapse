@@ -325,6 +325,36 @@ Exemplo de resposta:
 }
 ```
 
+#### Adicionando itens à prescrição
+- Para adicionar um item à prescrição, basta disparar um comando para o módulo de prescrição, como no exemplo abaixo:
+
+```js
+MdHub.command.send('plataforma.prescricao', 'addItem', {
+  // Id do medicamento na Memed (opcional, se for informado o 'nome')
+  id: 'a123123123'
+  // Nome do medicamento (opcional, se for informado o 'id')
+  nome: 'Vitamina C, comprimido (100un)',
+  // Posologia (opcional)
+  posologia: '<p>HTML da posologia</p>',
+  // Quantidade do medicamento que será adicionado à prescrição (opcional, valor padrão é 1)
+  // informe quantidade 0 para uso contínuo
+  quantidade: 1,
+  // Composição do medicamento (opcional)
+  composicao: '<p>HTML da composição</p>',
+  // Fabricante do medicamento (opcional)
+  fabricante: 'Nome do fabricante',
+  // Titularidade do medicamento (opcional)
+  titularidade: 'Similar',
+  // Preço do medicamento (opcional)
+  preco: 1.99,
+  // Descrição do medicamento (opcional)
+  descricao: 'Ácido Ascórbico'
+});
+```
+> _Importante:_ Será identificado como medicamento customizado se for informado sem **id** e com **nome**, ou com um **id** inválido e com **nome**.
+
+> _Importante:_ Medicamento sem **id** e sem **nome** será ignorado.
+
 #### Desativando recursos
 É possível customizar algumas funcionalidades e características da prescrição. Para isso, você pode usar o comando `setFeatureToggle` após inicializar o Sinapse Prescrição. Veja abaixo as opções disponíveis:
 
