@@ -421,7 +421,7 @@ MdHub.command.send('plataforma.prescricao', 'setAdditionalData', {
         }
     ],
     // Para pular de linha no ropapé, envie a string com um "\n"
-    'footer' => "Rodapé da prescrição \n Segunda linha do rodapé",
+    'footer': "Rodapé da prescrição \n Segunda linha do rodapé",
 });
 ```
 
