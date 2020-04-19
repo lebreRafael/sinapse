@@ -78,7 +78,7 @@ curl -X POST \
               "nome": "José",
               // Data de nascimento
               "data_nascimento": "01/01/1985",
-              // Sobrenome do Médico
+              // Sobrenome do Médico (obrigatório)
               "sobrenome": "da Silva",
               // CPF do Médico
               "cpf": "000.000.000-00",
